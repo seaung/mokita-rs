@@ -4,7 +4,7 @@ use clap::{Parser, Subcommand};
 #[command(version, about, long_about = None, author = "seaung")]
 pub struct Cli {
     #[arg(short, long)]
-    debug: u8,
+    config: std::path::PathBuf,
 
     #[command(subcommand)]
     command: Option<Commands>,
@@ -12,36 +12,28 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    Server {
-        #[arg(short, long)]
-        config: String,
-    },
-    Client {
-        #[arg(short, long)]
-        config: String,
-    },
+    Server,
+    Client,
 }
 
-pub fn start() {
+pub fn start_server() {
     let cli = Cli::parse();
 
-    let mut debug: bool;
+    let config_path = &cli.config;
 
-    match cli.debug {
-        0 => debug = true,
-        1 => debug = false,
-        _ => debug = false,
+    if !config_path.exists() {
+        panic!("config file not found...");
     }
 
-    match &cli.command {
-        Some(Commands::Server { config }) => {
-            print!("开始运行服务程序...");
+    match cli.command {
+        Some(Commands::Server) => {
+            println!("start server programming deamon...");
         }
-        Some(Commands::Client { config }) => {
-            println!("开始运行客户端程序...")
+        Some(Commands::Client) => {
+            println!("start client programming daemon...");
         }
         None => {
-            println!("请选择一个程序执行!");
+            eprintln!("No Command provide. run mokita-rs --help please...")
         }
     }
 }
