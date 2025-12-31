@@ -1,6 +1,7 @@
 pub mod cfg;
 pub mod code;
 pub mod db;
+pub mod logger;
 
 use anyhow::{Context, Ok};
 

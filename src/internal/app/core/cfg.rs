@@ -1,7 +1,7 @@
 use config::Config;
 use std::{fs, sync::OnceLock};
 
-static CFG: OnceLock<Config> = OnceLock::new();
+pub static CFG: OnceLock<Config> = OnceLock::new();
 
 pub fn init_config(filepath: &str) {
     let path = fs::canonicalize(filepath).unwrap_or_else(|e| panic!("{}", e));
