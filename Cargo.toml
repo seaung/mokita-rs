@@ -8,6 +8,8 @@ anyhow = "1.0.100"
 axum = "0.8.4"
 clap = { version = "4.5.41", features = ["derive"] }
 config = "0.15.13"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.148"
 sqlx = { version = "0.8.6", features = ["runtime-tokio", "tls-native-tls", "postgres", "derive", "chrono", "migrate", "uuid", "macros"] }
 thiserror = "2.0.17"
 tokio = { version = "1.46.1", features = ["full"] }
